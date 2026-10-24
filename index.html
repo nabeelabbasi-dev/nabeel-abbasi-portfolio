@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabeel Abbasi | Web Developer & UI Designer</title>
+    <meta name="description" content="Official portfolio of Nabeel Abbasi. Frontend Web Developer specializing in clean, responsive web solutions and modern design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        header h1 span {
+            color: var(--accent-color);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-card h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 8px;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .skill-badge {
+            background: #090d16;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #090d16;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header>
+            <h1>Nabeel <span>Abbasi</span></h1>
+            <p>Frontend Web Developer & UI Designer</p>
+        </header>
+
+        <!-- About Section -->
+        <div class="section-card">
+            <h2>About Me</h2>
+            <p>
+                Hello! I'm <strong>Nabeel Abbasi</strong>, a passionate web developer focused on building modern, responsive, and user-friendly web interfaces. I specialize in transforming ideas into functional web applications using clean HTML5, CSS3, and modern JavaScript techniques.
+            </p>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="section-card">
+            <h2>Technical Capabilities</h2>
+            <div class="skills-grid">
+                <span class="skill-badge">HTML5</span>
+                <span class="skill-badge">CSS3 / Grid & Flexbox</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Responsive Web Design</span>
+                <span class="skill-badge">Netlify Deployment</span>
+                <span class="skill-badge">Git & GitHub</span>
+            </div>
+        </div>
+
+        <!-- Connect / Social Links -->
+        <div class="section-card">
+            <h2>Connect With Me</h2>
+            <p>Explore my profiles across platforms or get in touch for web projects:</p>
+            <div class="links-grid">
+                <a href="https://github me" target="_blank" class="social-link">GitHub</a>
+                <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn</a>
+                <a href="https://twitter.com" target="_blank" class="social-link">Twitter / X</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Nabeel Abbasi. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
