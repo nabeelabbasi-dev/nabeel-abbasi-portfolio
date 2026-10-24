@@ -1,44 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen</title>
+  </head>
+  <body>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nabeel Abbasi | Web Developer & CS Student</title>
-    <meta name="description" content="Official website of Nabeel Abbasi - Web Developer, UI Designer, and Computer Science Student.">
+
+    <title>Nabeel Abbasi | Cyberpunk Developer Portfolio</title>
+    <meta name="description" content="Official 3D Cyberpunk Developer Portfolio of Nabeel Abbasi - 18-year-old CS Student, Web & Discord Developer.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Three.js Library for 3D Canvas Background -->
+    <!-- Three.js Library for 3D Background Effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
+        /* CSS Reset & Root Variables */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-color: #06080d;
+            --card-bg: rgba(13, 18, 30, 0.7);
+            --primary-neon: #00f2fe;
+            --secondary-neon: #4facfe;
+            --accent-purple: #7f00ff;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --glow-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
         }
 
         body {
-            background-color: #050811;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 20px;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* 3D Canvas */
-        #canvas-container {
+        /* Canvas Background Fix */
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -48,93 +71,111 @@
             pointer-events: none;
         }
 
-        /* Content Wrapper */
-        .main-wrapper {
+        /* Layout Container */
+        .wrapper {
             position: relative;
-            z-index: 1;
+            z-index: 10;
             width: 100%;
-            max-width: 1000px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 25px 20px 60px 20px;
         }
 
-        /* Top Announcement Bar */
-        .top-bar {
+        /* Top Bar Header */
+        header {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-bottom: 50px;
+            padding: 20px 0 40px 0;
             flex-wrap: wrap;
-            gap: 12px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            padding: 12px 24px;
-            border-radius: 50px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+            margin-bottom: 40px;
+            backdrop-filter: blur(8px);
         }
 
-        .top-bar-brand {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00f2fe;
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
             letter-spacing: -0.5px;
-        }
-
-        .top-info {
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
             display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
         }
 
-        .top-info span {
-            color: #00f2fe;
+        .brand-logo i {
+            color: var(--primary-neon);
+            -webkit-text-fill-color: initial;
+            font-size: 1.5rem;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .stat-badge {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(6px);
+        }
+
+        .stat-badge span {
+            color: var(--primary-neon);
             font-weight: 600;
         }
 
-        /* Main Hero Layout */
-        .hero-container {
-            width: 100%;
+        /* Hero Container */
+        .hero-section {
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 50px;
             align-items: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
 
-        @media (max-width: 850px) {
-            .hero-container {
+        @media (max-width: 900px) {
+            .hero-section {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
         }
 
-        /* Profile Left */
-        .profile-side {
+        /* Left Column Profile */
+        .profile-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 18px;
+            gap: 20px;
         }
 
-        .avatar-frame {
-            width: 260px;
-            height: 260px;
+        .avatar-glow-ring {
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, #00f2fe, #4facfe, #6b21a8);
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.4);
+            padding: 5px;
+            background: linear-gradient(135deg, var(--primary-neon), var(--accent-purple));
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.4), 0 0 15px rgba(127, 0, 255, 0.4);
+            animation: pulseGlow 4s infinite alternate;
             position: relative;
-            transition: transform 0.3s ease;
         }
 
-        .avatar-frame:hover {
-            transform: scale(1.03);
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 25px rgba(0, 242, 254, 0.3), 0 0 10px rgba(127, 0, 255, 0.3); }
+            100% { box-shadow: 0 0 45px rgba(0, 242, 254, 0.6), 0 0 25px rgba(127, 0, 255, 0.6); }
         }
 
         .avatar-img {
@@ -143,294 +184,473 @@
             border-radius: 50%;
             object-fit: cover;
             background-color: #0b0f19;
+            border: 3px solid #06080d;
         }
 
         .badge-verified {
-            border: 1px solid #00f2fe;
             background: rgba(0, 242, 254, 0.1);
-            color: #00f2fe;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.82rem;
+            border: 1px solid var(--primary-neon);
+            color: var(--primary-neon);
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(8px);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
         }
 
-        /* Bio Right Side */
-        .bio-side h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            line-height: 1.1;
+        /* Bio Details Right */
+        .bio-container h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 10px;
         }
 
-        .bio-side h1 span {
-            color: #00f2fe;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        .bio-container h1 .name {
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .bio-subtitle {
-            font-size: 1.8rem;
+        .typing-role {
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: #e2e8f0;
+            color: #cbd5e1;
+            margin-bottom: 22px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 900px) {
+            .typing-role {
+                justify-content: center;
+            }
         }
 
         .typing-text {
-            color: #00f2fe;
-            border-right: 2px solid #00f2fe;
-            padding-right: 6px;
+            color: var(--primary-neon);
+            border-right: 2px solid var(--primary-neon);
+            padding-right: 4px;
             animation: blink 0.75s step-end infinite;
         }
 
         @keyframes blink {
             from, to { border-color: transparent }
-            50% { border-color: #00f2fe; }
+            50% { border-color: var(--primary-neon); }
         }
 
-        .bio-description {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            background: rgba(15, 23, 42, 0.4);
-            padding: 20px;
+        .bio-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 242, 254, 0.2);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .bio-description strong {
-            color: #e2e8f0;
+        .bio-card p {
+            color: #cbd5e1;
+            font-size: 0.98rem;
+            line-height: 1.8;
         }
 
-        /* Social Icons */
-        .social-row {
+        .code-tag {
+            font-family: 'Fira Code', monospace;
+            background: rgba(0, 242, 254, 0.12);
+            color: var(--primary-neon);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* Social Row */
+        .social-buttons {
             display: flex;
-            gap: 15px;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        @media (max-width: 850px) {
-            .social-row {
+        @media (max-width: 900px) {
+            .social-buttons {
                 justify-content: center;
             }
         }
 
-        .social-btn {
-            width: 48px;
-            height: 48px;
+        .social-icon {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(0, 242, 254, 0.3);
-            background: rgba(0, 242, 254, 0.05);
-            color: #00f2fe;
+            color: var(--primary-neon);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             text-decoration: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
         }
 
-        .social-btn:hover {
-            background: #00f2fe;
-            color: #050811;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
-            transform: translateY(-4px);
+        .social-icon:hover {
+            background: var(--primary-neon);
+            color: #06080d;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
         }
 
         /* Projects Section */
-        .projects-section {
-            width: 100%;
-            margin-top: 20px;
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .accent-line {
+            width: 5px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--primary-neon), var(--accent-purple));
+            border-radius: 4px;
+            box-shadow: 0 0 12px var(--primary-neon);
         }
 
         .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 700;
             color: #ffffff;
-            margin-bottom: 25px;
-            border-left: 4px solid #00f2fe;
-            padding-left: 14px;
+            letter-spacing: -0.5px;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
+        /* 3D Tilt Cards */
         .project-card {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(0, 242, 254, 0.2);
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 242, 254, 0.15);
             border-radius: 20px;
-            padding: 28px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
             transform-style: preserve-3d;
             perspective: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .project-card:hover {
-            border-color: #00f2fe;
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.25);
-            transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+            border-color: var(--primary-neon);
+            box-shadow: 0 12px 40px rgba(0, 242, 254, 0.25);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .project-icon {
+            font-size: 1.8rem;
+            color: var(--primary-neon);
         }
 
         .project-card h3 {
-            font-size: 1.35rem;
-            color: #00f2fe;
+            font-size: 1.4rem;
+            color: #ffffff;
             margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .project-card p {
-            color: #94a3b8;
-            font-size: 0.92rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 22px;
+            margin-bottom: 25px;
         }
 
-        .project-link {
-            display: inline-block;
-            color: #050811;
-            background: #00f2fe;
-            padding: 9px 22px;
-            border-radius: 20px;
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .tag {
+            font-size: 0.78rem;
+            font-family: 'Fira Code', monospace;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            color: var(--secondary-neon);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(127, 0, 255, 0.1));
+            border: 1px solid var(--primary-neon);
+            color: var(--primary-neon);
+            border-radius: 12px;
             text-decoration: none;
-            font-size: 0.88rem;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
 
-        .project-link:hover {
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.7);
-            transform: scale(1.05);
+        .project-btn:hover {
+            background: var(--primary-neon);
+            color: #06080d;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
         }
 
-        /* Toast notification for copying discord */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #00f2fe;
-            color: #050811;
-            font-weight: 600;
-            text-align: center;
-            border-radius: 25px;
-            padding: 12px;
+        /* Toast Popup Notification */
+        .toast {
             position: fixed;
-            z-index: 10;
             bottom: 30px;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+            right: 30px;
+            background: #0f172a;
+            border: 1px solid var(--primary-neon);
+            color: var(--primary-neon);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
         }
 
-        #toast.show {
-            visibility: visible;
+        .toast.show {
             opacity: 1;
-            bottom: 50px;
+            transform: translateY(0);
         }
 
         footer {
-            margin-top: 70px;
-            color: #64748b;
-            font-size: 0.85rem;
+            margin-top: 80px;
             text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        footer span {
+            color: var(--primary-neon);
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D Three.js Background Canvas -->
-    <div id="canvas-container"></div>
+    <!-- 3D Three.js Particle Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="main-wrapper">
-        <!-- Top Announcement / Status Bar -->
-        <div class="top-bar">
-            <div class="top-bar-brand">nabeelabbasi</div>
-            <div class="top-info">
-                <div>Discord: <span>nabeel_abbasi</span></div>
-                <div>Focus: <span>Web Development & CS</span></div>
+    <!-- Main Wrapper -->
+    <div class="wrapper">
+        
+        <!-- Header / Top Bar -->
+        <header>
+            <div class="brand-logo">
+                <i class="fa-solid fa-terminal"></i> nabeelabbasi
             </div>
-        </div>
+            <div class="header-stats">
+                <div class="stat-badge">
+                    <i class="fa-brands fa-discord" style="color: #5865F2;"></i>
+                    Discord: <span>nabeel_abbasi</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Status: <span>CS Student</span>
+                </div>
+                <div class="stat-badge">
+                    <i class="fa-solid fa-certificate"></i>
+                    ORCHID-iD: <span>Verified Member</span>
+                </div>
+            </div>
+        </header>
 
         <!-- Hero Section -->
-        <div class="hero-container">
-            
-            <!-- Profile Image & Badge Left -->
-            <div class="profile-side">
-                <div class="avatar-frame">
-                    <!-- Sung Jin-Woo Anime Avatar -->
-                    <img src="https://images.alphacoders.com/134/thumb-1920-1349883.png" alt="Nabeel Abbasi" class="avatar-img">
+        <section class="hero-section">
+            <!-- Left Profile Column -->
+            <div class="profile-container">
+                <div class="avatar-glow-ring">
+                    <!-- Sung Jin-Woo Anime Profile Avatar -->
+                    <img src="https://images.alphacoders.com/134/thumb-1920-1349883.png" alt="Nabeel Abbasi Avatar" class="avatar-img">
                 </div>
                 <div class="badge-verified">
                     <i class="fa-solid fa-circle-check"></i> VERIFIED OFFICIAL
                 </div>
             </div>
 
-            <!-- Bio Right -->
-            <div class="bio-side">
-                <h1>Hi, It's <span>Nabeel</span></h1>
-                <div class="bio-subtitle">I'm a <span class="typing-text" id="typing"></span></div>
-                
-                <div class="bio-description">
-                    <strong>Nabeel Abbasi</strong>, 18-year-old passionate computer science student, Discord & Web developer, couple custom websites coder. Codes in <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript (.js)</strong>, and <strong>Python (.py)</strong>. ORCHID-iD member with codes released under <strong>MIT Licensing</strong>. Official first member of <strong>tawfeer.fun</strong> website.
+            <!-- Right Bio Column -->
+            <div class="bio-container">
+                <h1>Hi, It's <span class="name">NABEEL ABBASI</span></h1>
+                <div class="typing-role">
+                    I'm a <span class="typing-text" id="typewriter"></span>
                 </div>
 
-                <!-- Social Links -->
-                <div class="social-row">
-                    <a href="https://github.com/nabeelabbasi-dev" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/nabeel-abbasi-a10b59430" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="https://x.com/nabeel_abbasid" target="_blank" class="social-btn" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://discord.com/users/1485591819734745259" target="_blank" class="social-btn" title="Discord Profile" onclick="copyDiscord(event)"><i class="fa-brands fa-discord"></i></a>
+                <div class="bio-card">
+                    <p>
+                        <strong>Nabeel Abbasi</strong>, 18-year-old passionate computer science student, Discord & Web developer, couples custom websites coder, codes in <span class="code-tag">HTML</span>, <span class="code-tag">CSS</span>, <span class="code-tag">JavaScript (.js)</span> and <span class="code-tag">Python (.py)</span>, ORCHID-iD member with codes released under MIT Licensing, Official first members of <strong>tawfeer.fun</strong> website.
+                    </p>
+                </div>
+
+                <!-- Social Links Updated -->
+                <div class="social-buttons">
+                    <a href="https://github.com/nabeelabbasi-dev" target="_blank" class="social-icon" title="GitHub Profile">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <div class="social-icon" onclick="copyDiscord()" title="Copy Discord Tag">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <a href="https://www.linkedin.com/in/nabeel-abbasi-a10b59430" target="_blank" class="social-icon" title="LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://x.com/nabeel_abbasid" target="_blank" class="social-icon" title="Twitter / X Profile">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Projects Section -->
-        <div class="projects-section">
-            <h2 class="section-title">Featured Projects</h2>
-            
+        <section class="projects-section">
+            <div class="section-header">
+                <div class="accent-line"></div>
+                <h2 class="section-title">Featured Creations & Work</h2>
+            </div>
+
             <div class="projects-grid">
+                
                 <!-- Project 1 -->
-                <div class="project-card">
-                    <h3>Personal Portfolio Hub</h3>
-                    <p>A high-performance 3D interactive portfolio featuring Three.js particles, custom cyber design, and responsive layout deployed on Netlify.</p>
-                    <a href="https://nabeel-abbasi.netlify.app" target="_blank" class="project-link">View Live <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <div class="project-card" data-tilt>
+                    <div>
+                        <div class="project-header">
+                            <i class="fa-solid fa-bolt project-icon"></i>
+                            <span class="tag">MIT License</span>
+                        </div>
+                        <h3>Tawfeer.fun Platform</h3>
+                        <p>First official member & contributor to tawfeer.fun website, developing core frontend interactive elements and python backend integrations.</p>
+                        <div class="tech-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/nabeelabbasi-dev" target="_blank" class="project-link project-btn">
+                        View Repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card">
-                    <h3>Custom Interactive Web App</h3>
-                    <p>Custom couple & personal web experiences built with custom HTML/CSS, dynamic cards, background music players, and interactive UI components.</p>
-                    <a href="https://github.com/nabeelabbasi-dev" target="_blank" class="project-link">View Code <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <div class="project-card" data-tilt>
+                    <div>
+                        <div class="project-header">
+                            <i class="fa-solid fa-heart project-icon"></i>
+                            <span class="tag">Custom Client Code</span>
+                        </div>
+                        <h3>Custom Couple Websites</h3>
+                        <p>Handcrafted romantic interactive web applications built with audio integration, dynamic time counters, memory galleries, and custom animations.</p>
+                        <div class="tech-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Audio Web API</span>
+                            <span class="tag">Netlify</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/nabeelabbasi-dev" target="_blank" class="project-link project-btn">
+                        View Showcases <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
                 </div>
-            </div>
-        </div>
 
+                <!-- Project 3 -->
+                <div class="project-card" data-tilt>
+                    <div>
+                        <div class="project-header">
+                            <i class="fa-solid fa-cubes project-icon"></i>
+                            <span class="tag">ORCHID-iD</span>
+                        </div>
+                        <h3>Interactive 3D Portfolio</h3>
+                        <p>High-performance Cyberpunk portfolio featuring Three.js real-time particle rendering, 3D card tilts, and verified ORCHID-iD developer credentials.</p>
+                        <div class="tech-tags">
+                            <span class="tag">Three.js</span>
+                            <span class="tag">WebGL</span>
+                            <span class="tag">CSS Glows</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/nabeelabbasi-dev" target="_blank" class="project-link project-btn">
+                        Source Code <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
         <footer>
-            <p>&copy; 2026 Nabeel Abbasi. All rights reserved.</p>
+            <p>&copy; 2026 <span>Nabeel Abbasi</span>. Released under MIT License & ORCHID-iD Ecosystem.</p>
         </footer>
+
     </div>
 
-    <!-- Copy Toast Notification -->
-    <div id="toast">Discord User ID Copied & Opening Profile!</div>
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-check-circle"></i> Copied Discord ID: nabeel_abbasi
+    </div>
 
-    <!-- Typing Effect & 3D Particles Script -->
+    <!-- JavaScript & Interactive Scripts -->
     <script>
-        // Typing Effect
-        const words = ["Web Developer", "CS Student", "Discord Developer", "UI Designer"];
+        // Copy Discord Username
+        function copyDiscord() {
+            const tempInput = document.createElement("input");
+            tempInput.value = "nabeel_abbasi";
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        // Typewriter Effect
+        const words = ["Computer Science Student", "Web Developer", "Discord Developer", "Custom Website Coder"];
         let i = 0, timer;
 
         function typingEffect() {
             let word = words[i].split("");
             var loopTyping = function() {
                 if (word.length > 0) {
-                    document.getElementById('typing').innerHTML += word.shift();
+                    document.getElementById('typewriter').innerHTML += word.shift();
                 } else {
                     setTimeout(deletingEffect, 2000);
                     return false;
@@ -445,7 +665,7 @@
             var loopDeleting = function() {
                 if (word.length > 0) {
                     word.pop();
-                    document.getElementById('typing').innerHTML = word.join("");
+                    document.getElementById('typewriter').innerHTML = word.join("");
                 } else {
                     if (words.length > (i + 1)) {
                         i++;
@@ -462,83 +682,120 @@
 
         typingEffect();
 
-        // Copy Discord Function
-        function copyDiscord(e) {
-            var toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
+        // 3D Card Tilt Interaction
+        const cards = document.querySelectorAll('[data-tilt]');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
 
-        // Three.js 3D Interactive Background
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
-
-        // Particle Galaxy
-        const particlesCount = 700;
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(particlesCount * 3);
-        const colors = new Float32Array(particlesCount * 3);
-
-        for(let i = 0; i < particlesCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 15;
-            positions[i+1] = (Math.random() - 0.5) * 15;
-            positions[i+2] = (Math.random() - 0.5) * 15;
-
-            colors[i] = 0; // R
-            colors[i+1] = 0.95; // G
-            colors[i+2] = 1; // B
-        }
-
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        const material = new THREE.PointsMaterial({
-            size: 0.04,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.8
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)`;
+            });
         });
 
-        const particleSystem = new THREE.Points(geometry, material);
-        scene.add(particleSystem);
+        // Three.js Interactive 3D Particle Space Background
+        let scene, camera, renderer, particles, particleSystem;
+        let mouseX = 0, mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
 
-        camera.position.z = 5;
+        function initThreeJS() {
+            const canvas = document.getElementById('bg-canvas');
+            
+            // Scene & Camera
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 1000;
 
-        // Mouse Interactivity
-        let mouseX = 0;
-        let mouseY = 0;
+            // Geometry Particles
+            const particleCount = 1200;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) - 0.5;
-            mouseY = (e.clientY / window.innerHeight) - 0.5;
-        });
+            const colorCyan = new THREE.Color('#00f2fe');
+            const colorPurple = new THREE.Color('#7f00ff');
 
-        // Animation Loop
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 2000;
+                positions[i + 1] = (Math.random() - 0.5) * 2000;
+                positions[i + 2] = (Math.random() - 0.5) * 2000;
+
+                const mixedColor = Math.random() > 0.5 ? colorCyan : colorPurple;
+                colors[i] = mixedColor.r;
+                colors[i + 1] = mixedColor.g;
+                colors[i + 2] = mixedColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // Material
+            const material = new THREE.PointsMaterial({
+                size: 3.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Listeners
+            document.addEventListener('mousemove', onDocumentMouseMove);
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX) * 0.15;
+            mouseY = (event.clientY - windowHalfY) * 0.15;
+        }
+
+        function onWindowResize() {
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
         function animate() {
             requestAnimationFrame(animate);
 
-            particleSystem.rotation.x += 0.001;
-            particleSystem.rotation.y += 0.002;
+            // Rotate particle mesh
+            particleSystem.rotation.y += 0.001;
+            particleSystem.rotation.x += 0.0005;
 
-            particleSystem.rotation.x += mouseY * 0.02;
-            particleSystem.rotation.y += mouseX * 0.02;
+            // Camera movement following mouse cursor smoothly
+            camera.position.x += (mouseX - camera.position.x) * 0.03;
+            camera.position.y += (-mouseY - camera.position.y) * 0.03;
+            camera.lookAt(scene.position);
 
             renderer.render(scene, camera);
         }
 
-        animate();
-
-        // Responsive Resizing
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+        window.onload = function() {
+            initThreeJS();
+            animate();
+        };
     </script>
 </body>
 </html>
